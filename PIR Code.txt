@@ -1,0 +1,37 @@
+1.	/*
+2.	* PIR sensor tester
+3.	*/
+4.	
+5.	int ledPin = 13; // choose the pin for the LED
+6.	int inputPin = 2; // choose the input pin (for PIR sensor)
+7.	int pirState = LOW; // we start, assuming no motion detected
+8.	int val = 0; // variable for reading the pin status
+9.	
+10.	void setup() {
+11.	pinMode(ledPin, OUTPUT); // declare LED as output
+12.	pinMode(inputPin, INPUT); // declare sensor as input
+13.	
+14.	Serial.begin(9600);
+15.	}
+16.	
+17.	void loop(){
+18.	val = digitalRead(inputPin); // read input value
+19.	if (val == HIGH) { // check if the input is HIGH
+20.	digitalWrite(ledPin, HIGH); // turn LED ON
+21.	if (pirState == LOW) {
+22.	// we have just turned on
+23.	Serial.println("Motion detected!");
+24.	// We only want to print on the output change, not state
+25.	pirState = HIGH;
+26.	}
+27.	} else {
+28.	digitalWrite(ledPin, LOW); // turn LED OFF
+29.	if (pirState == HIGH){
+30.	// we have just turned of
+31.	Serial.println("Motion ended!");
+32.	// We only want to print on the output change, not state
+33.	pirState = LOW;
+34.	}
+35.	}
+36.	}
+
