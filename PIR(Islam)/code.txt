@@ -1,0 +1,49 @@
+#include <Arduino.h>
+
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+
+#include <ESP8266HTTPClient.h>
+
+#include <WiFiClient.h>
+// Have fun ?
+  /*
+2.    * PIR sensor tester
+3.    */
+
+#define ledPin D0
+#define inputPin D1
+    /*int ledPin = 13; // choose the pin for the LED
+   int inputPin = 2; // choose the input pin (for PIR sensor)*/
+   
+    int pirState = LOW; // we start, assuming no motion detected
+    
+
+    void setup(){
+      Serial.begin(115200);
+    pinMode(ledPin, OUTPUT); // declare LED as output
+    pinMode(inputPin, INPUT); // declare sensor as input
+
+    
+    }
+     void loop(){
+    int val = 0; // variable for reading the pin status
+    val = digitalRead(inputPin); // read input value
+    if (val == 1) { // check if the input is HIGH
+      Serial.println("Detected\n"); 
+    digitalWrite(ledPin, HIGH); // turn LED ON
+    delay(1000);
+     
+     
+   
+    } else {
+      Serial.println("NormalState");
+    digitalWrite(ledPin, HIGH);
+    delay(250);
+    digitalWrite(ledPin, LOW);
+    
+    
+  
+    }
+    
+    }
