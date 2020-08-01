@@ -1,1 +1,45 @@
 shakib here
+
+
+
+
+
+
+const int trigerpin=2;
+const int echopin=4;
+vois setup(){
+serial .availble(9600);
+}
+Void loop (){
+PinMode (trigerpin,OUTPUT);
+digitalWrite(trigerpin,LOW);
+delay(2);
+digitalWrite(trigerpin,HIGH );
+delay(10);
+digitalWrite(trigerpin,LOW );
+long duration , inch,cm;
+
+pinMode(echopin,INPUT);
+duration = pulseIn(echopin,HIGH);
+digital Write(echopin,HIGH);
+inche=microsecondsToInches(duration);
+cm==microsecondsToCentimeters(duration);
+seral.print(“inche=”);
+serial.print(inche);
+serial.print(“cm”);
+serial.print(cm)
+serial.print(“”);
+delay(100);
+}
+Long microsecondsToInches(long microseconds);
+{
+return microseconds  /74/2;
+//put your main code here to run
+}
+Long microsecondsToCentimeters(long microseconds);
+{
+return microseconds  /94/2;
+}
+
+
+
