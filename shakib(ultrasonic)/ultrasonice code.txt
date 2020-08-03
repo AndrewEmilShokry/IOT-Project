@@ -1,0 +1,61 @@
+define BLYNK_PRINT Serial
+
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+const int trigPin = D5; 
+const int echoPin = D6; 
+long duration;
+int distance;
+// You should get Auth Token in the Blynk App.
+// Go to the Project Settings (nut icon).
+char auth[] = "uvklHbfF0xrq2Z62jJZMZcHKcDrfEh--";
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
+char ssid[] = "MRazine";
+char pass[] = "Razine22@we.com";
+
+WidgetLCD lcd(V1);
+
+void setup() {
+Serial.begin(115200); // Starts the serial communication
+pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
+pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+ Blynk.begin(auth, ssid, pass);
+  // You can also specify server:
+  //Blynk.begin(auth, ssid, pass, "http://blynk-cloud.com", 8442);
+  //Blynk.begin(auth, ssid, pass, IPAddress(192,168,1,100), 8442);
+
+ // lcd.clear(); //Use it to clear the LCD Widget
+  //lcd.print(0,0,"Distance in cm"); // use: (position X: 0-15, position Y: 0-1, "Message you want to print")
+  // Please use timed events when LCD printintg in void loop to avoid sending too many commands
+  // It will cause a FLOOD Error, and connection will be dropped
+}
+void loop() {
+  lcd.clear();
+
+// Clears the trigPin
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+
+// Sets the trigPin on HIGH state for 10 micro seconds
+digitalWrite(trigPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+
+// Reads the echoPin, returns the sound wave travel time in microseconds
+duration = pulseIn(echoPin, HIGH);
+
+// Calculating the distance
+distance= duration*0.034/2;
+// Prints the distance on the Serial Monitor
+Serial.print("Distance: ");
+Serial.println(distance);
+  lcd.print(4,0,"Distance CM");
+  lcd.print(4,1,distance);
+
+  http://Blynk.run();
+
+delay(2000);
+
